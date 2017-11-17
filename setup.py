@@ -9,7 +9,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='pytelegraf_exec',
-    version='0.1.0',
+    version='0.1.1',
     description='A easy to use line format convertor for influxdb.',
     long_description=long_description,
     # What does your project relate to?
