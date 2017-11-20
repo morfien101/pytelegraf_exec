@@ -42,25 +42,28 @@ jobs:
             python -m pytest
       
       # bump version
-      - run:
-          name: bump version
-          command: |
-            chmod 770 version_bump.sh
-            ./version_bump.sh
-            git config user.name "Circle CI"
-            git config user.email "circle@ci.build"
-            git commit setup.py -m "circle.ci - bumping version"
-            git push
+      #- run:
+      #    name: bump version
+      #    command: |
+      #      chmod 770 version_bump.sh
+      #      ./version_bump.sh
+      #      git config user.name "Circle CI"
+      #      git config user.email "circle@ci.build"
+      #      git commit setup.py -m "circle.ci - bumping version"
+      #      git push
     upload:
       - run:
           name: Push to PIPy
           command: |
             python setup.py bdist_wheel --universal
-            twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+            twine upload --repository-url https://test.pypi.org/legacy/ dist/* -u $PYPI_USERNAME -p $PYPI_PASSWORD
       
 workflows:
   version: 2
   build-and-push:
     jobs:
       - build-and-test
-      - upload
+      - upload:
+        context: org-global
+        requires:
+          - build-and-test
