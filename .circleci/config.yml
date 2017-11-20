@@ -55,6 +55,8 @@ jobs:
           name: Push to PIPy
           context: org-global
           command: |
+            python3 -m venv venv
+            . venv/bin/activate
             python setup.py bdist_wheel --universal
-            twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+            python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
