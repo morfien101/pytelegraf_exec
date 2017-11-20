@@ -49,7 +49,7 @@ jobs:
             ./version_bump.sh
             git config user.name "Circle CI"
             git config user.email "circle@ci.build"
-            git commit pytelegraf_exec.py -m "circle.ci - bumping version"
+            git commit setup.py -m "circle.ci - bumping version"
             git push
     upload:
       - run:
