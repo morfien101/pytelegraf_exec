@@ -51,10 +51,16 @@ jobs:
       #      git config user.email "circle@ci.build"
       #      git commit setup.py -m "circle.ci - bumping version"
       #      git push
-
       - run:
           name: Push to PIPy
-          context: org-global
+          context: 
           command: |
             python setup.py bdist_wheel --universal
             twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+      
+workflows:
+  version: 2
+  build-and-push:
+    jobs:
+      - build-and-test:
+        context: org-global
